@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: url('./assets/sunset.jpg') no-repeat center center/cover;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  /* position: relative; */
+  background-color: rgba(0,0,0,0.4);
+  color: #fff;
+}
+
+
+.app:before {
+  content: '';
+  
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.app .search {
+  text-align: center;
+  padding: 1rem;
+  align-items: center;
+}
+
+.app input {
+  padding: .7rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  border: 1px solid rgba(255,255,255, 0.8);
+  background: rgba(255,255,255, 0.1);
+  color: #f8f8f8;
+}
+
+::placeholder {
+  color: #f8f8f8;
+}
+
+.container {
+
+  max-width: 700px;
+ 
+  height: fit-content;
+  margin-left: 0 px;
+  padding: 0 1rem;
+  position: relative;
+  top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.app .top {
+  width: 100%;
+  margin: 1rem auto;
+}
+
+.app .description {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.app .bottom {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 100%;
+ align-items: center;
+ 
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: rgba(255,255,255, 0.2);
+  height: fit-content;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.side{
+  margin-left: 55px;
+  height:fit-content ;
+  justify-content: space-evenly;
+   display: flex;  
+  text-align: center;
+  width:fit-content ;
+  padding: 3rem;
+  border-radius: 12px;
+  background-color: rgba(255,255,255, 0.2);
+}
+
+.enclosed{
+ display: flex;
+  
+}
+/* .button{
+  background-color: rgba(255,255,255, 0.2);
+  border-radius: 13px;
+  padding: 12px;
+  font-size: 17px;
+  color: white;
+  width:90px ;
+  margin-left: 8px;
+} */
+.so2{
+  margin:15px ;
+}
+.no2{
+  margin: 15px;
+}
+.pm10{
+  margin: 15px;
+}
+.pm2_5{
+  margin: 15PX;
+}
+.o3{
+  margin: 15px;
+}
+.co{
+  margin:15px ;
+}
+.aqi{
+  margin: 15px;
+}
+.last{
+  margin-top: 250px;
+  font-style:oblique;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 20px;
+}
+.air__{
+display: flex;
+}
+.airquality{
+  margin-left: 250px;
+}
+.sunrise{
+  background-color: rgba(255,255,255, 0.2);
+ 
+}
+ 
+ 
+.button-86 {
+  all: unset;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px 20px;
+ 
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+margin-left: 10px;
+  border-radius: 10px;
+ align-items: center;
+}
+
+.button-86::after,
+.button-86::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all .4s;
+}
+
+.button-86::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255, 0.2);
+  border-radius: 10px;
+}
+
+.button-86::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.button-86:hover::before {
+  transform: translate(5%, 5%);
+  width: 110%;
+  height: 110%;
+}
+
+.button-86:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.button-86:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
+}
