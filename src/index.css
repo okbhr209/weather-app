@@ -6,12 +6,10 @@
   padding: 0;
 }
 
-/* .imageee{
-  background-image: url(./assets/9c866775e6b40e9ebb100d86e817cf18.png);
-  align-items: center;
-} */
+
 .accu{
  text-align: left;
+ text-align: right;
 }
 body {
   font-family: 'Outfit', 'Segoe UI', 'Roboto', 'Oxygen',
@@ -54,10 +52,13 @@ h1 {
   text-align: center;
   padding: 1rem;
   align-items: center;
+  display: flex;
 }
 
 .app input {
-  padding: .7rem 1.5rem;
+  align-items: center;
+  padding: 0.9rem 1.5rem;
+  margin-left: 150px;
   font-size: 1.2rem;
   border-radius: 25px;
   border: 1px solid rgba(255,255,255, 0.8);
@@ -187,7 +188,7 @@ display: flex;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-margin-left: 10px;
+  margin-left: 10px;
   border-radius: 10px;
  align-items: center;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import axios from 'axios'
 
 const App = () => {
   const [data, setData] = useState({})
@@ -139,9 +138,9 @@ const App = () => {
   return (
     <div className="app">
  
-    <h3 className='accu'>AccuWeather </h3> 
+
       <div className="search">
-     
+      <h3 className='accu'>AccuWeather </h3> 
         <input
 
           type="search"
