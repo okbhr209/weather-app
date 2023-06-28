@@ -1,35 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
-// import React, { useState, useEffect } from 'react';
-// import "./css/style.css";
-
-// function App ()  {
-
-//   const [humidity, setHumdity] = useState(null);
-//   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=54d6ced3ba645f45dd959d83a7c0b199`;
-
-
-//     const url2 = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=54d6ced3ba645f45dd959d83a7c0b199`;
-//     const response = await fetch(url);
-//     const resJson = await response.json();
-//     console.log(resJson);
-
-
-//   const searchLocation = (event) => {
-//     if (event.key === 'Enter') {
-//       axios.get(url).then((response) => {
-//         setData(response.data)
-//         setHumdity(response.data.main.humidity) ;
-
-//         console.log(response.data)
-//         console.log(humidity) ;
-//       })
-//       setLocation('')
-//     }
-//   }
-
-//import "D:\react_\tempapp\tempreact\src\components\css\style.css"
-// D:\react_\tempapp\tempreact\src\components\Tempapp.js
+// import axios from 'axios'
 
 const App = () => {
   const [data, setData] = useState({})
@@ -61,18 +31,9 @@ const App = () => {
   const [feels_like, setFeels_like] = useState(null);
   const [speed, setSpeed] = useState(null);
 
-  // useEffect ( ){
-
-
-  // } ,[search] 
-
-
   function timeConverter(UNIX_timestamp) {
     var a = new Date(UNIX_timestamp * 1000);
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    // var year = a.getFullYear();
-    // var month = months[a.getMonth()];
-    // var date = a.getDate();
     var hour = a.getHours();
     var min = a.getMinutes();
     var sec = a.getSeconds();
@@ -96,16 +57,18 @@ const App = () => {
   function handleClick() {
     const fetchApi = async () => {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=54d6ced3ba645f45dd959d83a7c0b199`;
-      // const response = await fetch(url);
-      // const resJson = await response.json();
+ 
       await fetch(url)
         .then(response => response.json())
         .then(async(resJson) => {
+          if(resJson.cod==404){
+            alert("Not a Valid city name..")
+            return;
+          }
 
 
           const urlair = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${resJson?.coord?.lat}&lon=${resJson?.coord?.lon}&appid=54d6ced3ba645f45dd959d83a7c0b199`
-          // const response2 = await fetch(urlair);
-          // const resJson2 = await response2.json();
+
           await fetch(urlair)
             .then(response => response.json())
             .then((resJson2) => {
@@ -119,7 +82,7 @@ const App = () => {
               setCo(resJson2.list[0].components.co);
 
               console.log(aqi);
-              //
+
               if (resJson2.list[0].main.aqi === 1) {
                 setStatus("Good");
                 setMessage("Air quality is satisfactory, and air pollution poses little or no risk.");
@@ -143,21 +106,14 @@ const App = () => {
        
             })
 
-        //  console.log(resJson);
           setFirst(false);
 
           if (resJson.cod === "404") setFound(false);
           else setFound(true);
 
-
-
-
-          //
-
-      
+         
           console.log(status);
           console.log(message);
-          //   console.log(aqi);
 
           setImg(resJson.weather[0].icon);
 
@@ -211,7 +167,11 @@ const App = () => {
                 </div>
                 <div className="temp">
                   {temp ? <h1>{temp}°C</h1> : null}
+                  <div> {`Sunrise : ${sunrise}`} </div>
+                <div> {`Sunset : ${sunset}`} </div>
                 </div>
+              
+
                 <div className='air__'>
                   <div className="description">
                     {desc ? <p>{desc}</p> : null}
@@ -296,7 +256,7 @@ const App = () => {
               }
 
             </div>
-            <p className='last'> <b>{` Last Updated : ${time} `}</b></p>
+            <p className='last'> <b>{` Last Updated : ${time}   `}  UTC <sup>+5.30</sup> </b></p>
           </div>
         )
         }
