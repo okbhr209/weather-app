@@ -138,8 +138,10 @@ const App = () => {
 
   return (
     <div className="app">
+ 
+    <h3 className='accu'>AccuWeather </h3> 
       <div className="search">
-
+     
         <input
 
           type="search"

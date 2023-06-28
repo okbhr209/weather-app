@@ -6,6 +6,13 @@
   padding: 0;
 }
 
+/* .imageee{
+  background-image: url(./assets/9c866775e6b40e9ebb100d86e817cf18.png);
+  align-items: center;
+} */
+.accu{
+ text-align: left;
+}
 body {
   font-family: 'Outfit', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
