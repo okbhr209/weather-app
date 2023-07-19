@@ -56,79 +56,74 @@ const App = () => {
   function handleClick() {
     const fetchApi = async () => {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=54d6ced3ba645f45dd959d83a7c0b199`;
- 
-      await fetch(url)
-        .then(response => response.json())
-        .then(async(resJson) => {
-          if(resJson.cod==404){
-            alert("Not a Valid city name..")
-            return;
-          }
+      const res = await fetch(url);
+      const resJson = await res.json();
+      if (resJson.cod == 404) {
+        alert("Not a Valid city name..")
+        return;
+      }
+      console.log(resJson);
+
+      const urlair = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${resJson?.coord?.lat}&lon=${resJson?.coord?.lon}&appid=54d6ced3ba645f45dd959d83a7c0b199`
+      const res2 = await fetch(urlair);
+      const resJson2 = await res2.json();
+
+      console.log(resJson2);
+      setAqi(resJson2.list[0].main.aqi);
+      setSo2(resJson2.list[0].components.so2);
+      setNo2(resJson2.list[0].components.no2);
+      setPm10(resJson2.list[0].components.pm10);
+      setPm2_5(resJson2.list[0].components.pm2_5);
+      setO3(resJson2.list[0].components.o3);
+      setCo(resJson2.list[0].components.co);
+
+      // console.log(aqi);
+
+      if (resJson2.list[0].main.aqi === 1) {
+        setStatus("Good");
+        setMessage("Air quality is satisfactory, and air pollution poses little or no risk.");
+      }
+      else if (resJson2.list[0].main.aqi === 2) {
+        setStatus("Fair");
+        setMessage("Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution.");
+      }
+      else if (resJson2.list[0].main.aqi === 3) {
+        setStatus("Moderate");
+        setMessage("Members of sensitive groups may experience health effects. The general public is less likely to be affected.");
+      }
+      else if (resJson2.list[0].main.aqi === 4) {
+        setStatus("Poor");
+        setMessage("Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects.");
+      }
+      else if (resJson2.list[0].main.aqi === 5) {
+        setStatus("Very Poor");
+        setMessage("Health alert: The risk of health effects is increased for everyone.Everyone is more likely to be affected.");
+      }
+
+      setFirst(false);
+
+      if (resJson.cod === "404") setFound(false);
+      else setFound(true);
 
 
-          const urlair = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${resJson?.coord?.lat}&lon=${resJson?.coord?.lon}&appid=54d6ced3ba645f45dd959d83a7c0b199`
+      console.log(status);
+      console.log(message);
 
-          await fetch(urlair)
-            .then(response => response.json())
-            .then((resJson2) => {
-              console.log(resJson2);
-              setAqi(resJson2.list[0].main.aqi);
-              setSo2(resJson2.list[0].components.so2);
-              setNo2(resJson2.list[0].components.no2);
-              setPm10(resJson2.list[0].components.pm10);
-              setPm2_5(resJson2.list[0].components.pm2_5);
-              setO3(resJson2.list[0].components.o3);
-              setCo(resJson2.list[0].components.co);
+      setImg(resJson.weather[0].icon);
 
-              console.log(aqi);
+      setTemp(resJson.main.temp);
+      setCity(resJson.name);
+      setMin(resJson.main.temp_min);
+      setmax(resJson.main.temp_max);
+      setHumdity(resJson.main.humidity);
+      setDesc(resJson.weather[0].description)
+      setCountry(resJson.sys.country);
+      setSunrise(timeConverter(resJson.sys.sunrise));
+      setSunset(timeConverter(resJson.sys.sunset));
+      setTime(dateConverter(resJson.dt));
+      setFeels_like(resJson.main.feels_like);
+      setSpeed(resJson.wind.speed);
 
-              if (resJson2.list[0].main.aqi === 1) {
-                setStatus("Good");
-                setMessage("Air quality is satisfactory, and air pollution poses little or no risk.");
-              }
-              else if (resJson2.list[0].main.aqi === 2) {
-                setStatus("Fair");
-                setMessage("Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution.");
-              }
-              else if (resJson2.list[0].main.aqi === 3) {
-                setStatus("Moderate");
-                setMessage("Members of sensitive groups may experience health effects. The general public is less likely to be affected.");
-              }
-              else if (resJson2.list[0].main.aqi === 4) {
-                setStatus("Poor");
-                setMessage("Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects.");
-              }
-              else if (resJson2.list[0].main.aqi === 5) {
-                setStatus("Very Poor");
-                setMessage("Health alert: The risk of health effects is increased for everyone.Everyone is more likely to be affected.");
-              }
-       
-            })
-
-          setFirst(false);
-
-          if (resJson.cod === "404") setFound(false);
-          else setFound(true);
-
-         
-          console.log(status);
-          console.log(message);
-
-          setImg(resJson.weather[0].icon);
-
-          setTemp(resJson.main.temp);
-          setCity(resJson.name);
-          setMin(resJson.main.temp_min);
-          setmax(resJson.main.temp_max);
-          setHumdity(resJson.main.humidity);
-          setDesc(resJson.weather[0].description)
-          setCountry(resJson.sys.country);
-          setSunrise(timeConverter(resJson.sys.sunrise));
-          setSunset(timeConverter(resJson.sys.sunset));
-          setTime(dateConverter(resJson.dt));
-          setFeels_like(resJson.main.feels_like);
-          setSpeed(resJson.wind.speed);
-        })
 
     }
     fetchApi();
@@ -137,10 +132,10 @@ const App = () => {
 
   return (
     <div className="app">
- 
+
 
       <div className="search">
-      <h3 className='accu'>AccuWeather </h3> 
+        <h3 className='accu'>AccuWeather </h3>
         <input
 
           type="search"
@@ -169,9 +164,9 @@ const App = () => {
                 <div className="temp">
                   {temp ? <h1>{temp}°C</h1> : null}
                   <div> {`Sunrise : ${sunrise}`} </div>
-                <div> {`Sunset : ${sunset}`} </div>
+                  <div> {`Sunset : ${sunset}`} </div>
                 </div>
-              
+
 
                 <div className='air__'>
                   <div className="description">
